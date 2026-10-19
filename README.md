@@ -1,0 +1,18 @@
+# Sisal Mangrove Analyses
+
+Downloadable analyses from the Sisal Mangrove Monitor, a mangrove monitoring study in Sisal, Yucatán, Mexico
+(TU Delft students with UNAM). Each analysis can be run on your own data, location and question.
+
+The website that shows our finished results: [Sisal Mangrove Monitor](https://github.com/Finnbaas/sisal-mangrove-monitor)
+(its Method page explains each analysis).
+
+## Analyses
+
+| Analysis | What it does |
+|---|---|
+| [climatology/event-anomaly](climatology/event-anomaly/) | Anomaly chart around an event (storm, heat wave, ...): how much daily climate values differed from normal. |
+| [satellite](satellite/) | Coming soon. |
+
+## License
+
+MIT, see [LICENSE](LICENSE).
