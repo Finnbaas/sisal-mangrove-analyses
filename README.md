@@ -14,6 +14,7 @@ The website that shows our finished results: [Sisal Mangrove Monitor](https://gi
 | [climatology/seasonal-cycle](climatology/seasonal-cycle/) | Seasonal cycle (a typical year): monthly mean with a 10th to 90th percentile band, rainfall as monthly totals. |
 | [climatology/long-term-trend](climatology/long-term-trend/) | Long-term trend: annual means with a linear trend (± 95% range, p-value); the trend line is drawn only when p < 0.05. |
 | [climatology/monthly-range](climatology/monthly-range/) | Monthly range and running mean: the lowest to highest daily value of each month as a band, plus a 365-day running mean. |
+| [climatology/wave-wind-rose](climatology/wave-wind-rose/) | Wave and wind rose: where waves or wind come from in 8 sectors, for all days and for days above a threshold. |
 | [satellite](satellite/) | Coming soon. |
 
 ## License
