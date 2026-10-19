@@ -15,6 +15,7 @@ the first and last month with events and the peak month(s).
 |---|---|
 | `event_counts.py` | The script that counts the events and draws the charts. Settings at the top. |
 | `make_events_from_hurdat2.py` | Optional helper: makes the events CSV from HURDAT2 storm tracks for any location, radius and strength. |
+| `hurdat.py` | Reads HURDAT2 and selects the storms near the location, used by the helper. The same file is in the storm-tracks package; do not change it here only. |
 | `requirements.txt` | The Python packages you need (pandas, numpy, matplotlib). |
 | `example_data/sisal_storms.csv` | The 17 storms within 100 km of Sisal, 1950 to 2024 (made by the helper). The settings in `event_counts.py` run on it. |
 | `example_data/hurdat2_atlantic.txt` | The HURDAT2 Atlantic storm tracks (NOAA National Hurricane Center, 1851 to 2024), input of the helper. |
