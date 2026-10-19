@@ -22,6 +22,13 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent     # the folder of the package
 warnings_list = []                         # all warnings, printed again at the end
 
+# A character the console cannot show (for example a minus sign on an old Windows console) becomes a
+# question mark instead of stopping the script.
+try:
+    sys.stdout.reconfigure(errors="replace")
+except (AttributeError, ValueError):
+    pass
+
 
 def stop(message):
     """Stops the script with a clear message (no crash with a long error text)."""
