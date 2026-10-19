@@ -11,6 +11,7 @@ The website that shows our finished results: [Sisal Mangrove Monitor](https://gi
 | Analysis | What it does |
 |---|---|
 | [climatology/event-anomaly](climatology/event-anomaly/) | Anomaly chart around an event (storm, heat wave, ...): how much daily climate values differed from normal. |
+| [climatology/seasonal-cycle](climatology/seasonal-cycle/) | Seasonal cycle (a typical year): monthly mean with a 10th to 90th percentile band, rainfall as monthly totals. |
 | [satellite](satellite/) | Coming soon. |
 
 ## License
