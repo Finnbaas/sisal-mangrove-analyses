@@ -13,6 +13,7 @@ The website that shows our finished results: [Sisal Mangrove Monitor](https://gi
 | [climatology/event-anomaly](climatology/event-anomaly/) | Anomaly chart around an event (storm, heat wave, ...): how much daily climate values differed from normal. |
 | [climatology/seasonal-cycle](climatology/seasonal-cycle/) | Seasonal cycle (a typical year): monthly mean with a 10th to 90th percentile band, rainfall as monthly totals. |
 | [climatology/long-term-trend](climatology/long-term-trend/) | Long-term trend: annual means with a linear trend (± 95% range, p-value); the trend line is drawn only when p < 0.05. |
+| [climatology/monthly-range](climatology/monthly-range/) | Monthly range and running mean: the lowest to highest daily value of each month as a band, plus a 365-day running mean. |
 | [satellite](satellite/) | Coming soon. |
 
 ## License
