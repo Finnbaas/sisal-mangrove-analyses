@@ -1,3 +1,5 @@
 venv/
 output/
 __pycache__/
+ndvi_output_monthly/
+ews_output_monthly/

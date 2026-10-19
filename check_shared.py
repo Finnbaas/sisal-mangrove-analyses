@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 # The files that must be identical in every package that has them.
-SHARED_FILES = ["load_data.py", "hurdat.py"]
+SHARED_FILES = ["load_data.py", "hurdat.py", "GEE_NDVI.js", "ndvi_monthly_classification.ipynb"]
 
 ROOT = Path(__file__).resolve().parent
 

@@ -17,7 +17,9 @@ The website that shows our finished results: [Sisal Mangrove Monitor](https://gi
 | [climatology/wave-wind-rose](climatology/wave-wind-rose/) | Wave and wind rose: where waves or wind come from in 8 sectors, for all days and for days above a threshold. |
 | [climatology/event-counts](climatology/event-counts/) | Events per month and year from a list of events, plus a helper that makes a storm list from HURDAT2 for any location, radius and strength. |
 | [climatology/storm-tracks](climatology/storm-tracks/) | Storm tracks near a location: map of the tropical storms and hurricanes within a radius, coloured by strength. |
-| [satellite](satellite/) | Coming soon. |
+| [satellite/ndvi-time-series](satellite/ndvi-time-series/) | NDVI time series for your location: monthly maximum NDVI from Landsat (Earth Engine script plus notebook), with one plot per point. |
+| [satellite/tipping-point-analysis](satellite/tipping-point-analysis/) | Tipping point analysis: breakpoints and early warning signals before them, tested against surrogates and control points. |
+| [satellite/shape-class-map](satellite/shape-class-map/) | Shape-class map: groups many points into shape classes and plots them on a map. |
 
 ## License
 
