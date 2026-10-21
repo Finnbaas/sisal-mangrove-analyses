@@ -20,6 +20,7 @@ The website that shows our finished results: [Sisal Mangrove Monitor](https://gi
 | [satellite/ndvi-time-series](satellite/ndvi-time-series/) | NDVI time series for your location: monthly maximum NDVI from Landsat (Earth Engine script plus notebook), with one plot per point. |
 | [satellite/tipping-point-analysis](satellite/tipping-point-analysis/) | Tipping point analysis: breakpoints and early warning signals before them, tested against surrogates and control points. |
 | [satellite/shape-class-map](satellite/shape-class-map/) | Shape-class map: groups many points into shape classes and plots them on a map. |
+| [satellite/mangrove-maps](satellite/mangrove-maps/) | Mangrove maps for your own area in Earth Engine. First map: Change (where mangrove was lost or gained, 1993 to 2025, beta). Condition and Disturbance and recovery follow. |
 
 ## License
 
