@@ -1,5 +1,5 @@
 /**********************************************************************
- * MANGROVE CHANGE  ·  STEP 2 OF 3: MANGROVE PER PERIOD + CHANGE CLASSES
+ * MANGROVE EXTENT  ·  STEP 2 OF 3: MANGROVE PER PERIOD + CHANGE CLASSES
  * Sisal Mangrove Monitor (TU Delft x UNAM Sisal) · MIT license
  *
  * Decides per period which pixels are mangrove, then compares the

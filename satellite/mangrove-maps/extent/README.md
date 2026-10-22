@@ -1,8 +1,8 @@
 Beta: tested on Sisal and one other area in Yucatan. Report problems via GitHub issues.
 
-# Mangrove change for your own study area
+# Mangrove extent for your own study area
 
-Part of the **Sisal Mangrove Monitor** (TU Delft × UNAM Sisal). This package makes a map of where mangrove disappeared or appeared between 1993 and 2025, for any study area, in your own Google Earth Engine (GEE) account. It's the same method as the Change map on our Vegetation page.
+Part of the **Sisal Mangrove Monitor** (TU Delft × UNAM Sisal). This package makes a map of where mangrove disappeared or appeared between 1993 and 2025, for any study area, in your own Google Earth Engine (GEE) account. It's the same method as the Extent map on our Vegetation page.
 
 **Result:** a map with four classes (stable mangrove, confirmed loss, confirmed gain, uncertain change), the area per class, and when the confirmed changes happened.
 
@@ -29,7 +29,7 @@ You can start with the quick route and switch later: only step 2 changes.
 | `1_period_images.js` | Builds one cloud-free Landsat image per period (dry season) and saves it in your project | both routes |
 | `2a_training_points_conabio.js` | Makes training points from the CONABIO mangrove maps of Mexico | accurate route, Mexico |
 | `2_mangrove_maps.js` | Decides per period which pixels are mangrove and makes the change classes | both routes |
-| `3_change_map.js` | Checks every change against NDVI and draws the map, legend and tables | both routes |
+| `3_extent_map.js` | Checks every change against NDVI and draws the map, legend and tables | both routes |
 | `example/sisal_aoi.geojson` | Our study area in Sisal, Yucatán | testing |
 | `example/sisal_training_points.csv` | Our training points for Sisal | testing the accurate route on Sisal |
 
@@ -46,7 +46,7 @@ You can start with the quick route and switch later: only step 2 changes.
    var NAME      = 'myarea';     // short name, no spaces
    ```
 
-**Tip: test on Sisal first.** Don't draw anything and leave `NAME = 'sisal'`. The scripts then use our study area, and you can compare your result with the Change map on our website. If it looks the same, your setup works.
+**Tip: test on Sisal first.** Don't draw anything and leave `NAME = 'sisal'`. The scripts then use our study area, and you can compare your result with the Extent map on our website. If it looks the same, your setup works.
 
 ---
 
@@ -69,7 +69,7 @@ Keep the area reasonable: up to about 50 × 50 km works well. Larger areas take 
 |---|---|---|---|
 | 1 | `1_period_images.js` | Set `SEASON` to the dry months of your region. Run. Read the CHECKS. Set `RUN_EXPORT = true`, Run, then **Tasks → RUN**. | 10–40 min |
 | 2 | `2_mangrove_maps.js` | `MASK_SOURCE = 'GMW'`. Run and read the CHECKS (see below). Then `RUN_EXPORT = true`, Run, **Tasks → RUN**. | 20–60 min |
-| 3 | `3_change_map.js` | Run. The map, legend and tables appear. | 1–3 min |
+| 3 | `3_extent_map.js` | Run. The map, legend and tables appear. | 1–3 min |
 
 ## Route B: accurate (labelled training points)
 
@@ -88,7 +88,7 @@ Keep the area reasonable: up to about 50 × 50 km works well. Larger areas take 
 3. Run `1_period_images.js` (export) as in route A.
 4. Run `2a_training_points_conabio.js`. Read the warnings: if CONABIO uses class names the script doesn't know, add them to `CLASS_MAP`. Then `RUN_EXPORT = true` and **Tasks → RUN**. This creates `<NAME>_points`.
 5. Run `2_mangrove_maps.js` with `MASK_SOURCE = 'POINTS'` (export).
-6. Run `3_change_map.js`.
+6. Run `3_extent_map.js`.
 
 **Option B2: the Sisal example points (testing only)**
 1. Upload `example/sisal_training_points.csv`: **Assets → NEW → CSV file**. Under advanced options set the **X column to `lon`** and the **Y column to `lat`**. Name the asset `sisal_points`.

@@ -1,5 +1,5 @@
 /**********************************************************************
- * MANGROVE CHANGE  ·  STEP 3 OF 3: CHANGE MAP
+ * MANGROVE EXTENT  ·  STEP 3 OF 3: EXTENT MAP
  * Sisal Mangrove Monitor (TU Delft x UNAM Sisal) · MIT license
  *
  * Reads the assets of steps 1 and 2 and checks every mangrove loss or
@@ -63,7 +63,7 @@ var MIN_CONF_PATCH = 6;          // confirmed patches smaller than this -> not c
 var RUN_EXPORT   = false;
 var WEB_LINKS    = false;        // print PNG links of the map
 var WEB_PNG_SIZE = 640;          // ~ width of the study area / 30 m
-var DRIVE_FOLDER = 'mangrove_change';
+var DRIVE_FOLDER = 'mangrove_extent';
 
 
 // ========================== DATA ===================================
@@ -217,8 +217,8 @@ if (MAP_STYLE === 'per_period') {
 } else {
   SHOWN = MAPPED.updateMask(MAPPED.neq(S.hide).and(MAPPED.gt(0)))
     .visualize({min: 1, max: S.names.length, palette: S.pal}).clip(AOI);
-  Map.addLayer(SHOWN, {}, 'Mangrove change (' + MAP_STYLE + ')');
-  legend.add(ui.Label('Mangrove change ' + PERIODS[0].years[0] + '-' + PERIODS[N - 1].years[1],
+  Map.addLayer(SHOWN, {}, 'Mangrove extent (' + MAP_STYLE + ')');
+  legend.add(ui.Label('Mangrove extent ' + PERIODS[0].years[0] + '-' + PERIODS[N - 1].years[1],
     {fontWeight: 'bold', fontSize: '12px'}));
   S.names.forEach(function (n, i) { if (i + 1 !== S.hide) { legend.add(swatch(S.pal[i], n)); } });
 }
@@ -248,12 +248,12 @@ if (RUN_EXPORT) {
   Export.image.toDrive({image: ee.Image.cat([CLS.rename('class_extended'),
       CLS.remap(STYLES.simplified.from, STYLES.simplified.to).rename('class_simplified'),
       CP.rename('change_period')]).toByte().unmask(0),
-    description: NAME + '_change_classes', folder: DRIVE_FOLDER,
-    fileNamePrefix: NAME + '_change_classes', region: AOI,
+    description: NAME + '_extent_classes', folder: DRIVE_FOLDER,
+    fileNamePrefix: NAME + '_extent_classes', region: AOI,
     crs: P.crs, crsTransform: P.transform, maxPixels: 1e10});
-  Export.table.toDrive({collection: AREA_FC, description: NAME + '_change_areas',
+  Export.table.toDrive({collection: AREA_FC, description: NAME + '_extent_areas',
                         folder: DRIVE_FOLDER, fileFormat: 'CSV'});
-  Export.table.toDrive({collection: PERIOD_FC, description: NAME + '_change_per_period',
+  Export.table.toDrive({collection: PERIOD_FC, description: NAME + '_extent_per_period',
                         folder: DRIVE_FOLDER, fileFormat: 'CSV'});
   print('Export tasks created: open the Tasks tab and click RUN.');
 }

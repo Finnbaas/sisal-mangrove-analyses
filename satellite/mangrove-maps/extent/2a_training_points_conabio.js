@@ -1,5 +1,5 @@
 /**********************************************************************
- * MANGROVE CHANGE  ·  STEP 2a (ACCURATE ROUTE, MEXICO): TRAINING POINTS
+ * MANGROVE EXTENT  ·  STEP 2a (ACCURATE ROUTE, MEXICO): TRAINING POINTS
  * Sisal Mangrove Monitor (TU Delft x UNAM Sisal) · MIT license
  *
  * Only needed for the ACCURATE route. Skip it for the quick route
@@ -92,7 +92,7 @@ var NARROW_CLASSES = [4, 5, 6];
 var SEED = 42;
 
 var RUN_EXPORT = false;
-var DRIVE_FOLDER = 'mangrove_change';
+var DRIVE_FOLDER = 'mangrove_extent';
 
 
 // ========================== SETUP ==================================

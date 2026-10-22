@@ -1,5 +1,5 @@
 /**********************************************************************
- * MANGROVE CHANGE  ·  STEP 1 OF 3: PERIOD IMAGES
+ * MANGROVE EXTENT  ·  STEP 1 OF 3: PERIOD IMAGES
  * Sisal Mangrove Monitor (TU Delft x UNAM Sisal) · MIT license
  *
  * Builds one cloud-free Landsat image per period (dry season only) for
