@@ -15,7 +15,6 @@
  *   'simplified'  Stable mangrove / Loss (confirmed) / Gain (confirmed)
  *                 / Uncertain change
  *   'extended'    all 9 classes (see legend)
- *   'per_period'  confirmed loss (reds) and gain (blues) by period
  *
  * Nothing to export first: just Run. Optional: RUN_EXPORT = true for a
  * GeoTIFF and CSV tables in Google Drive; WEB_LINKS = true prints PNG
@@ -56,7 +55,7 @@ var PERIODS = [   // same as step 1
   {id: 'P7', years: [2024, 2025]}
 ];
 
-var MAP_STYLE  = 'simplified';   // 'simplified', 'extended' or 'per_period'
+var MAP_STYLE  = 'simplified';   // 'simplified' or 'extended'
 var PCT        = [5, 95];        // reference percentiles for "confirmed"
 var MIN_CONF_PATCH = 6;          // confirmed patches smaller than this -> not confirmed
 
@@ -143,8 +142,6 @@ var STYLES = {
     from: [1, 2, 3, 4, 5, 6, 7, 8, 9], to: [1, 0, 2, 4, 3, 4, 4, 4, 4], hide: 0
   }
 };
-var LOSS_PAL = ['fee5d9', 'fcbba1', 'fc9272', 'fb6a4a', 'de2d26', 'a50f15'];
-var GAIN_PAL = ['eff3ff', 'c6dbef', '9ecae1', '6baed6', '3182bd', '08519c'];
 
 
 // ========================== TABLES =================================
@@ -200,28 +197,12 @@ function swatch(color, text) {
     ui.Label(text, {fontSize: '11px', margin: '3px 0'})], ui.Panel.Layout.flow('horizontal'));
 }
 
-if (MAP_STYLE === 'per_period') {
-  var LOSS_VIS = CP.updateMask(CLS.eq(3)).visualize({min: 2, max: 7, palette: LOSS_PAL});
-  var GAIN_VIS = CP.updateMask(CLS.eq(5)).visualize({min: 2, max: 7, palette: GAIN_PAL});
-  SHOWN = ee.ImageCollection([LOSS_VIS, GAIN_VIS]).mosaic().clip(AOI);
-  Map.addLayer(SHOWN, {}, 'Confirmed loss and gain per period');
-  legend.add(ui.Label('Confirmed loss (red) and gain (blue) per period',
-    {fontWeight: 'bold', fontSize: '12px'}));
-  INTERVALS.forEach(function (it, i) {
-    legend.add(ui.Panel([
-      ui.Label('', {backgroundColor: '#' + LOSS_PAL[i], padding: '7px', margin: '2px 1px 2px 0'}),
-      ui.Label('', {backgroundColor: '#' + GAIN_PAL[i], padding: '7px', margin: '2px 6px 2px 0'}),
-      ui.Label(it.label + '  (' + it.span + ')', {fontSize: '11px', margin: '3px 0'})],
-      ui.Panel.Layout.flow('horizontal')));
-  });
-} else {
-  SHOWN = MAPPED.updateMask(MAPPED.neq(S.hide).and(MAPPED.gt(0)))
-    .visualize({min: 1, max: S.names.length, palette: S.pal}).clip(AOI);
-  Map.addLayer(SHOWN, {}, 'Mangrove extent (' + MAP_STYLE + ')');
-  legend.add(ui.Label('Mangrove extent ' + PERIODS[0].years[0] + '-' + PERIODS[N - 1].years[1],
-    {fontWeight: 'bold', fontSize: '12px'}));
-  S.names.forEach(function (n, i) { if (i + 1 !== S.hide) { legend.add(swatch(S.pal[i], n)); } });
-}
+SHOWN = MAPPED.updateMask(MAPPED.neq(S.hide).and(MAPPED.gt(0)))
+  .visualize({min: 1, max: S.names.length, palette: S.pal}).clip(AOI);
+Map.addLayer(SHOWN, {}, 'Mangrove extent (' + MAP_STYLE + ')');
+legend.add(ui.Label('Mangrove extent ' + PERIODS[0].years[0] + '-' + PERIODS[N - 1].years[1],
+  {fontWeight: 'bold', fontSize: '12px'}));
+S.names.forEach(function (n, i) { if (i + 1 !== S.hide) { legend.add(swatch(S.pal[i], n)); } });
 legend.add(ui.Label('Confirmed = mangrove maps and NDVI agree. Mapped areas, not error-adjusted.',
   {fontSize: '10px', color: '555555', margin: '4px 0 0 0'}));
 Map.add(legend);

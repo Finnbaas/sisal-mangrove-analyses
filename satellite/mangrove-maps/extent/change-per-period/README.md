@@ -1,10 +1,10 @@
 Beta: tested on Sisal and one other area in Yucatan. Report problems via GitHub issues.
 
-# Mangrove extent for your own study area
+# Mangrove change per period for your own study area
 
-Part of the **Sisal Mangrove Monitor** (TU Delft × UNAM Sisal). This package makes a map of where mangrove disappeared or appeared between 1993 and 2025, for any study area, in your own Google Earth Engine (GEE) account. It's the same method as the Extent map on our Vegetation page.
+Part of the **Sisal Mangrove Monitor** (TU Delft × UNAM Sisal). This package shows **when** mangrove was lost or gained between 1993 and 2025, for any study area, in your own Google Earth Engine (GEE) account. It is the same method as the Change per period view of the Extent map on our Ecosystem page. The map with the four change classes is the sibling package `change-classes`.
 
-**Result:** a map with four classes (stable mangrove, confirmed loss, confirmed gain, uncertain change), the area per class, and when the confirmed changes happened.
+**Result:** a map with confirmed loss (reds) and confirmed gain (blues) per interval between two periods (P1→P2 … P6→P7; darker = more recent), and a table with the loss and gain in hectares per interval. The last interval (P6→P7) is **provisional**: a change that shows only in the last period is not yet confirmed by a later period.
 
 ---
 
@@ -29,7 +29,7 @@ You can start with the quick route and switch later: only step 2 changes.
 | `1_period_images.js` | Builds one cloud-free Landsat image per period (dry season) and saves it in your project | both routes |
 | `2a_training_points_conabio.js` | Makes training points from the CONABIO mangrove maps of Mexico | accurate route, Mexico |
 | `2_mangrove_maps.js` | Decides per period which pixels are mangrove and makes the change classes | both routes |
-| `3_extent_map.js` | Checks every change against NDVI and draws the map, legend and tables | both routes |
+| `3_change_per_period.js` | Checks every change against NDVI per interval and draws the map, legend and table | both routes |
 | `example/sisal_aoi.geojson` | Our study area in Sisal, Yucatán | testing |
 | `example/sisal_training_points.csv` | Our training points for Sisal | testing the accurate route on Sisal |
 
@@ -46,7 +46,7 @@ You can start with the quick route and switch later: only step 2 changes.
    var NAME      = 'myarea';     // short name, no spaces
    ```
 
-**Tip: test on Sisal first.** Don't draw anything and leave `NAME = 'sisal'`. The scripts then use our study area, and you can compare your result with the Extent map on our website. If it looks the same, your setup works.
+**Tip: test on Sisal first.** Don't draw anything and leave `NAME = 'sisal'`. The scripts then use our study area, and you can compare your result with the Change per period map on our website (numbers: see "Expected result for Sisal"). If it looks the same, your setup works.
 
 ---
 
@@ -69,7 +69,7 @@ Keep the area reasonable: up to about 50 × 50 km works well. Larger areas take 
 |---|---|---|---|
 | 1 | `1_period_images.js` | Set `SEASON` to the dry months of your region. Run. Read the CHECKS. Set `RUN_EXPORT = true`, Run, then **Tasks → RUN**. | 10–40 min |
 | 2 | `2_mangrove_maps.js` | `MASK_SOURCE = 'GMW'`. Run and read the CHECKS (see below). Then `RUN_EXPORT = true`, Run, **Tasks → RUN**. | 20–60 min |
-| 3 | `3_extent_map.js` | Run. The map, legend and tables appear. | 1–3 min |
+| 3 | `3_change_per_period.js` | Run. The map, legend and table appear. | 1–3 min |
 
 ## Route B: accurate (labelled training points)
 
@@ -88,7 +88,7 @@ Keep the area reasonable: up to about 50 × 50 km works well. Larger areas take 
 3. Run `1_period_images.js` (export) as in route A.
 4. Run `2a_training_points_conabio.js`. Read the warnings: if CONABIO uses class names the script doesn't know, add them to `CLASS_MAP`. Then `RUN_EXPORT = true` and **Tasks → RUN**. This creates `<NAME>_points`.
 5. Run `2_mangrove_maps.js` with `MASK_SOURCE = 'POINTS'` (export).
-6. Run `3_extent_map.js`.
+6. Run `3_change_per_period.js`.
 
 **Option B2: the Sisal example points (testing only)**
 1. Upload `example/sisal_training_points.csv`: **Assets → NEW → CSV file**. Under advanced options set the **X column to `lon`** and the **Y column to `lat`**. Name the asset `sisal_points`.
@@ -119,8 +119,9 @@ Aim for at least 50 points per class and period, spread over the area, away from
 | `REF_PERIOD` | 2 | `'P6'` | The period that contains 2020 (the Global Mangrove Watch year) |
 | `MIN_PATCH_PIX` | 2 | `6` (~0.5 ha) | Smaller removes less noise, larger removes more detail |
 | `USE_BUILT_CONSTRAINT` | 2 | `true` | Keep on: stops roads outside towns being mapped as "built" |
-| `PCT` | 3 | `[5, 95]` | Stricter `[2.5, 97.5]` confirms fewer changes |
-| `MAP_STYLE` | 3 | `'simplified'` | `'extended'` (9 classes) or `'per_period'` (when it changed) |
+| `PCT` | 3 | `[5, 95]` | Whole numbers. Stricter `[2, 98]` confirms fewer changes |
+| `MIN_CONF_PATCH` | 3 | `6` | Confirmed patches smaller than this many pixels are dropped |
+| `WEB_LINKS` / `RUN_EXPORT` | 3 | `false` | `true` prints PNG links of the map / saves the table as CSV in Google Drive |
 
 ---
 
@@ -131,9 +132,26 @@ Every script prints **CHECK** lines in the Console. Read them before exporting.
 - **Step 1, scenes per period:** none should be 0. Few scenes (under about 10) means a noisy period.
 - **Step 2, internal test accuracy:** 0.9 or higher is good. This test is optimistic (it uses points from homogeneous areas), so it's a minimum check, not your map accuracy.
 - **Step 2, mangrove area vs Global Mangrove Watch:** should be in the same range. Very different means: check the mask on the map.
-- **Step 3, on the map:** do red and blue sit in plausible places (coastline, roads, known restoration sites)? Lots of grey on the mangrove edge is normal: that's where the maps disagree.
+- **Step 3, on the map:** do red and blue sit in plausible places (coastline, roads, known restoration sites)? Pixels that changed but are not confirmed are not drawn: expect fewer coloured pixels than in the Change classes map.
 
 **Accuracy assessment (for publication):** draw random points in the mapped classes, label them yourself on high-resolution images, and compute accuracy and error-adjusted area following Olofsson et al. (2014). Our Sisal scripts for this are available on request.
+
+---
+
+## Expected result for Sisal
+
+Run the quick route on Sisal (no drawn area, `NAME = 'sisal'`) and compare the table in the Console (CHECK 3) with the values on our website (Ecosystem page, Extent map, Change per period, mapped hectares). The accurate route should come close; the quick route (Global Mangrove Watch) can differ more.
+
+| Interval | Years | Confirmed loss (ha) | Confirmed gain (ha) |
+|---|---|---|---|
+| P1→P2 | 1993–97 → 1998–2002 | 0 | 0 |
+| P2→P3 | 1998–2002 → 2004–08 | 34.3 | 35.9 |
+| P3→P4 | 2004–08 → 2009–13 | 2.2 | 134.3 |
+| P4→P5 | 2009–13 → 2014–18 | 9.5 | 144.1 |
+| P5→P6 | 2014–18 → 2019–23 | 18.1 | 135.1 |
+| P6→P7 (provisional) | 2019–23 → 2024–25 | 36.3 | 58.2 |
+
+P2→P3 includes Hurricane Isidore (2002). Small differences are normal: this package uses all years automatically, while our website used yearly images checked by hand. If a number is far off (more than about 20%), or P1→P2 is not close to 0, check the CHECKS of steps 1 and 2 first.
 
 ---
 
@@ -153,6 +171,7 @@ Every script prints **CHECK** lines in the Console. Read them before exporting.
 
 - One Landsat pixel is 30 m. Small patches (under ~0.5 ha) are not reliable.
 - "Confirmed" means two independent sources agree: the mangrove maps and NDVI. "Uncertain" doesn't mean wrong, it means not proven.
+- The last interval (P6→P7) covers only the years 2024–2025 and no later period confirms it, so treat it as provisional.
 - The areas are **mapped** areas, not error-adjusted.
 - Landsat 7 has striping after 2003 (SLC-off). The period median removes most of it, but some noise can remain in P3 and P4.
 - Our Sisal results used yearly images checked by hand (cloudy years marked). This package uses all years automatically, so results for Sisal can differ slightly from our website.
