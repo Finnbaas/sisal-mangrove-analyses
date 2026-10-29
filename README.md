@@ -21,7 +21,9 @@ The website that shows our finished results: [Sisal Mangrove Monitor](https://gi
 | [satellite/tipping-point-analysis](satellite/tipping-point-analysis/) | Tipping point analysis: breakpoints and early warning signals before them, tested against surrogates and control points. |
 | [satellite/shape-class-map](satellite/shape-class-map/) | Shape-class map: groups many points into shape classes and plots them on a map. |
 | [satellite/mangrove-maps](satellite/mangrove-maps/) | Mangrove maps for your own area in Earth Engine. First map: Extent (where mangrove was lost or gained, 1993 to 2025, beta). Condition and Disturbance and recovery follow. |
+| [stakeholder-mapping/map-interview](stakeholder-mapping/map-interview/) | Map interview: interview guide, consent form and base map to let stakeholders draw where and why the mangrove changed. |
+| [stakeholder-mapping/interview-to-table](stakeholder-mapping/interview-to-table/) | From interview to table: coding sheet and theme rules that turn the interviews into one table sorted into three themes. |
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE). The templates in stakeholder-mapping are under CC BY 4.0.
