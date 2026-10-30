@@ -2,7 +2,7 @@ Beta: tested on Sisal and one other area in Yucatan. Report problems via GitHub 
 
 # Mangrove extent for your own study area
 
-Part of the **Sisal Mangrove Monitor** (TU Delft × UNAM Sisal). This package is the **Change classes** map; when the changes happened is in the sibling package `change-per-period`. It makes a map of where mangrove disappeared or appeared between 1993 and 2025, for any study area, in your own Google Earth Engine (GEE) account. It's the same method as the Extent map on our Vegetation page.
+Part of the **Sisal Mangrove Monitor** (TU Delft × UNAM Sisal). This package is the **Change classes** map; when the changes happened is in the sibling package `change-per-period`. It makes a map of where mangrove disappeared or appeared between 1993 and 2025, for any study area, in your own Google Earth Engine (GEE) account. It's the same method as the Extent map on our Ecosystem page.
 
 **Result:** a map with four classes (stable mangrove, confirmed loss, confirmed gain, uncertain change), the area per class, and when the confirmed changes happened.
 
